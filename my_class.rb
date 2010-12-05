@@ -8,16 +8,16 @@ class MyClass
   # include Client
   include FieldManagement
   
-  def self.find(security = '')
+  def self.find(group = '')
     xml = <<-XML
-    <security>
+    <a>
       <BDSA>1</BDSA>
       <BDSB>2</BDSB>
       <BDSC>3</BDSC>
       <EDSA>4</EDSA>
       <EDSB>5</EDSB>
       <EDSC>6</EDSC>
-    </security>
+    </a>
     XML
 
     MyClass::Mapper.parse(xml)
@@ -25,7 +25,6 @@ class MyClass
   
 end
 
-# Common
 class MyClass
   add_fields(:common, 
     ['BDSA', Float, :low],
@@ -34,7 +33,6 @@ class MyClass
   )
 end
 
-# Industry: Energy
 class MyClass
   add_fields(:a, 
     ['EDSA', Float, :elow],
@@ -47,7 +45,7 @@ end
 class MyClass
   class Mapper
     include HappyMapper
-    tag 'security'
+    tag 'a'
     
     MyClass.fields(:common).each do |tuple|
       element tuple[2], tuple[1], :tag => tuple[0]
@@ -58,9 +56,8 @@ end
 class MyClass
   class Mapper
     #include HappyMapper
-    #tag 'security'
-    
-    MyClass.fields(:energy).each do |tuple|
+
+    MyClass.fields(:a).each do |tuple|
       element tuple[2], tuple[1], :tag => tuple[0]
     end
   end

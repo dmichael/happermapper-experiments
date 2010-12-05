@@ -2,7 +2,7 @@ class News
   # include Client
   include FieldManagement
   
-  def self.find(security = '')
+  def self.find(group = '')
     xml = <<-XML
     <news>
       <ABC>1</ABC>
@@ -14,14 +14,12 @@ class News
   end
 end
 
-# Common
 class News
   add_fields(:common, 
     ['ABC', Float, :title]
   )
 end
 
-# Industry: Energy
 class News
   add_fields(:a, 
     ['XYZ', Float, :body]
